@@ -58,9 +58,6 @@
     <Folder Include="Properties" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Holiday.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <RefactorLog Include="ProjectCDataBase.refactorlog" />
   </ItemGroup>
 </Project>
