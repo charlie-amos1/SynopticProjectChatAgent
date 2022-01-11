@@ -12,6 +12,7 @@ namespace SynopticProjectChatAgent.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private List<Holiday> holiday = new List<Holiday>();
+        private Holiday userInput = new Holiday();
         //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
         public HomeController(ILogger<HomeController> logger)
@@ -24,13 +25,16 @@ namespace SynopticProjectChatAgent.Controllers
             return View(connection.GetAllHolidays(holiday));
         }
 
-        public ActionResult SelectContinent()
+        [HttpPost]
+        public ActionResult SelectContinent(string continent)
         {
+            //Holiday hol = new Holiday();
+            //hol.Continent = continent;
+            userInput.Continent = continent;
             return View();
         }
 
-        [HttpPost]
-        public ActionResult SelectCategory() 
+        public ActionResult SelectContinent() 
         {
             return View();
         }
