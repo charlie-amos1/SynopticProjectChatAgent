@@ -5,6 +5,7 @@ using SynopticProjectChatAgent.Models;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Session;
 
 namespace SynopticProjectChatAgent.Controllers
 {
@@ -32,6 +33,7 @@ namespace SynopticProjectChatAgent.Controllers
             //Holiday hol = new Holiday();
             //hol.Continent = continent;
             userInput.Continent = continent;
+            TempData["Continent"] = continent;
             return View("SelectCategory");
         }
 
@@ -39,6 +41,7 @@ namespace SynopticProjectChatAgent.Controllers
         public ActionResult SelectCategory(string category) 
         {
             userInput.Category= category;
+            TempData["Category"] = category;
             return View("SelectLocation");
         }
 
@@ -56,7 +59,8 @@ namespace SynopticProjectChatAgent.Controllers
         public ActionResult SelectLocation(string location)
         {
             userInput.Location= location;
-            return View("SelectStarRating");
+            TempData["Location"] = location;
+            return View("SelectTempRating");
         }
 
         public ActionResult SelectLocation() 
@@ -65,32 +69,32 @@ namespace SynopticProjectChatAgent.Controllers
         }
 
         [HttpPost]
-        public ActionResult SelectStarRating(string starRating)
+        public ActionResult SelectTempRating(string tempRating)
         {
-            userInput.StarRating = Convert.ToInt32(starRating);
+            userInput.TempRating = tempRating;
+            TempData["TempRating"] = tempRating;
             return View("FilteredResults");
         }
 
-        public ActionResult SelectStarRating()
+        public ActionResult SelectTempRating()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult FilteredResults(string continent, string category, string location, string tempRating) 
+        public ActionResult FilteredResults() 
         {
-            continent = userInput.Continent;
-            category = userInput.Category;
-            location = userInput.Location;
-            tempRating = userInput.TempRating;
-            //continent = "Europe";
-            // category = "active";
-            // location = "sea";
-            // tempRating = "mild";
+
+            var continent = TempData["Continent"];
+            var category = TempData["Category"];
+            var location = TempData["Location"];
+            var tempRating = TempData["TempRating"];
 
             if (ModelState.IsValid)
             {
-                return View(connection.GetFilteredHolidays(holiday,continent,category,location,tempRating));
+                //return View(connection.GetFilteredHolidays(holiday, "Europe", "active", "sea", "mild"));
+
+                //return View(connection.GetFilteredHolidays(holiday,continent,category,location,tempRating));
             }
             return View();
         }
@@ -103,11 +107,13 @@ namespace SynopticProjectChatAgent.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("TEst", "Session Value");
             return View();
         }
 
         public IActionResult Privacy()
         {
+            ViewBag.sessionv = HttpContext.Session.GetString("Test");
             return View();
         }
 
