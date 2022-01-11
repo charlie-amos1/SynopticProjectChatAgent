@@ -1,0 +1,39 @@
+﻿@page
+@model SynopticProjectChatAgent.Models.Holiday
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Select Category</title>
+
+</head>
+<body>
+
+<h4>Holiday</h4>
+<hr />
+<div> 
+    @using(Html.BeginForm("SelectCategory","Home", FormMethod.Post))
+        {
+            <p>Category</p>
+
+            <p>@Html.TextBoxFor(m=> m.Category)</p>
+ 
+            <p><input type="Submit" value="Submit"></p>
+        }
+</div>
+<div>
+    
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+</body>
+</html>

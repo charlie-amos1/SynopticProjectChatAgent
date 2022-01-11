@@ -25,13 +25,21 @@ namespace SynopticProjectChatAgent.Controllers
             return View(connection.GetAllHolidays(holiday));
         }
 
+
         [HttpPost]
         public ActionResult SelectContinent(string continent)
         {
             //Holiday hol = new Holiday();
             //hol.Continent = continent;
             userInput.Continent = continent;
-            return View();
+            return View("SelectCategory");
+        }
+
+        [HttpPost] 
+        public ActionResult SelectCategory(string category) 
+        {
+            userInput.Category= category;
+            return View("SelectLocation");
         }
 
         public ActionResult SelectContinent() 
@@ -39,9 +47,42 @@ namespace SynopticProjectChatAgent.Controllers
             return View();
         }
 
+        public ActionResult SelectCategory() 
+        {
+            return View("");
+        }
+
+        [HttpPost]
+        public ActionResult SelectLocation(string location)
+        {
+            userInput.Location= location;
+            return View("SelectStarRating");
+        }
+
+        public ActionResult SelectLocation() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SelectStarRating(string starRating)
+        {
+            userInput.StarRating = Convert.ToInt32(starRating);
+            return View("FilteredResults");
+        }
+
+        public ActionResult SelectStarRating()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult FilteredResults(string continent, string category, string location, string tempRating) 
         {
+            continent = userInput.Continent;
+            category = userInput.Category;
+            location = userInput.Location;
+            tempRating = userInput.TempRating;
             //continent = "Europe";
             // category = "active";
             // location = "sea";
