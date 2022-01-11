@@ -24,6 +24,17 @@ namespace SynopticProjectChatAgent.Controllers
             return View(connection.GetAllHolidays(holiday));
         }
 
+        public ActionResult SelectContinent()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult SelectCategory() 
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult FilteredResults(string continent, string category, string location, string tempRating) 
         {
