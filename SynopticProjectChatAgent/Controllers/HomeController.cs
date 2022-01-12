@@ -13,7 +13,7 @@ namespace SynopticProjectChatAgent.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private List<Holiday> holiday = new List<Holiday>();
+        public List<Holiday> holiday = new List<Holiday>();
         private Holiday userInput = new Holiday();
         //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
@@ -27,8 +27,6 @@ namespace SynopticProjectChatAgent.Controllers
         {
             _logger = logger;
         }
-
-
 
         public IActionResult ViewAll()
         {
@@ -73,7 +71,6 @@ namespace SynopticProjectChatAgent.Controllers
 
         public ActionResult SelectCategory() 
         {
-            Holiday holiday= new Holiday();
             return View("");
         }
 
@@ -95,7 +92,12 @@ namespace SynopticProjectChatAgent.Controllers
         {
             userInput.TempRating = tempRating;
             HttpContext.Session.SetString("TempRating", JsonConvert.SerializeObject(tempRating));
-            return View("FilteredResults");
+
+            var continent = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Continent"));
+            var category = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Category"));
+            var location = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Location"));
+
+            return View("FilteredResults", connection.GetFilteredHolidays(holiday, continent, category, location, tempRating));
         }
 
         public ActionResult SelectTempRating()
@@ -103,23 +105,12 @@ namespace SynopticProjectChatAgent.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult FilteredResults() 
-        {
+        //[HttpPost]
+        //public ActionResult FilteredResults() 
+        //{
 
-            var continent = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Continent"));
-            var category = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Category"));
-            var location = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Location"));
-            var tempRating = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("TempRating"));
 
-            //if (ModelState.IsValid)
-            //{
-            //    //return View(connection.GetFilteredHolidays(holiday, "Europe", "active", "sea", "mild"));
-
-            //    return View(connection.GetFilteredHolidays(holiday,continent,category,location,tempRating));
-            //}
-            return View(connection.GetFilteredHolidays(holiday, continent, category, location, tempRating));
-        }
+        //}
 
         public ActionResult HolidayInput()
         {

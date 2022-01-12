@@ -14,7 +14,8 @@ namespace SynopticProjectChatAgent.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                recordscreated = connection.Query<Holiday>("HolidayFilter", new { Continent = continent, Category = category, Location = location, TempRating=tempRating }, commandType: CommandType.StoredProcedure).ToList();
+                recordscreated = connection.Query<Holiday>("HolidayFilter", new { Continent = continent, Category = category, Location = location, TempRating=tempRating },
+                    commandType: CommandType.StoredProcedure).ToList();
 
             }
 
