@@ -25,11 +25,11 @@ namespace SynopticProjectChatAgent.Tests
         //expected
         List<Holiday> expectedResults = new List<Holiday>()
             {
-                new Holiday{ Category = category,TempRating=tempRating,Continent=continent,
+                new Holiday{ Category = category,TempRating=tempRating,
                  Location=location}
             };
             //act
-            var actualResult = connection.GetFilteredHolidays(expectedResults,continent,category,location,tempRating);
+            var actualResult = connection.GetFilteredHolidays(expectedResults,category,location,tempRating);
 
             //assert        
 

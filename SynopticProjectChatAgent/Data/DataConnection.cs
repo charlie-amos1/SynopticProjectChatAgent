@@ -10,11 +10,11 @@ namespace SynopticProjectChatAgent.Data
         string _connectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
 
 
-        public List<Holiday> GetFilteredHolidays(List<Holiday> recordscreated, string continent, string category, string location, string tempRating)
+        public List<Holiday> GetFilteredHolidays(List<Holiday> recordscreated,  string category, string location, string tempRating)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                recordscreated = connection.Query<Holiday>("HolidayFilter", new { Continent = continent, Category = category, Location = location, TempRating=tempRating },
+                recordscreated = connection.Query<Holiday>("HolidayFilter", new { Category = category, Location = location, TempRating=tempRating },
                     commandType: CommandType.StoredProcedure).ToList();
 
             }

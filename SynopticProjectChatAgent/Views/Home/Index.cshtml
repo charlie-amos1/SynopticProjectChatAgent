@@ -4,5 +4,19 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>Please Select an Option</p>
+        @using(Html.BeginForm("SelectContinent","Home", FormMethod.Post))
+        {
+            <div class="form-group">
+            <input type="submit" value="Use Holiday Agent" formaction=@Url.Action("EnterChatBot") class="btn btn-primary"/>
+            </div>
+        }
+                @using(Html.BeginForm("ViewAll","Home", FormMethod.Post))
+        {
+            <p></p>
+            <div class="form-group">
+            <input type="submit" value="View All Holidays" formaction=@Url.Action("ViewAll") formmethod="post" class="btn btn-primary"/>
+            </div>
+        }
+
 </div>

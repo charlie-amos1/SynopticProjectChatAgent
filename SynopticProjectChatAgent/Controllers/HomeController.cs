@@ -21,11 +21,7 @@ namespace SynopticProjectChatAgent.Controllers
         private DataConnection connection = new DataConnection();
         private FilterOptions filterOptions = new FilterOptions();
         private StringInputValidator inputValidator = new StringInputValidator();        
-        
-        private string _continent;
-        private string _category;
-        private string _location;
-        private string _tempating;
+       
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -38,20 +34,16 @@ namespace SynopticProjectChatAgent.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult SelectContinent(string continent)
-        {
-            //Holiday hol = new Holiday();
-            //hol.Continent = continent;
-            userInput.Continent = continent;
-            HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
-            if (inputValidator.CheckForValidInputs(filterOptions.ContinentChoices,continent)==false)
-            {
+        //[HttpPost]
+        //public ActionResult SelectContinent(string continent)
+        //{
+        //    //Holiday hol = new Holiday();
+        //    //hol.Continent = continent;
+        //    userInput.Continent = continent;
+        //    HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
+        //    return View("SelectCategory");
 
-            }
-            return View("SelectCategory");
-
-        }
+        //}
 
 
         [HttpPost] 
@@ -71,22 +63,17 @@ namespace SynopticProjectChatAgent.Controllers
             return View("SelectTempRating");
         }
 
-        public ActionResult SelectLocation() 
-        {
-            return View();
-        }
-
         [HttpPost]
         public ActionResult SelectTempRating(string tempRating)
         {
             userInput.TempRating = tempRating;
             HttpContext.Session.SetString("TempRating", JsonConvert.SerializeObject(tempRating));
 
-            var continent = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Continent"));
-            var category = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Category"));
-            var location = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Location"));
+            //var continent = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Continent"));
+            //var category = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Category"));
+            //var location = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Location"));
 
-            return View("FilteredResults", connection.GetFilteredHolidays(holiday, continent, category, location, tempRating));
+            return View("FilteredResults", connection.GetFilteredHolidays(holiday, "active", "Sea", "Mild"));
         }
 
         public ActionResult SelectTempRating()
@@ -94,22 +81,19 @@ namespace SynopticProjectChatAgent.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult FilteredResults() 
-        //{
-
-
-        //}
 
         public ActionResult HolidayInput()
         {
             return View();
         }
-         
+
+        public ActionResult EnterChatBot() 
+        {
+            return View("SelectCategory");
+        }
 
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("TEst", "Session Value");
             return View();
         }
 

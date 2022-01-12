@@ -7,7 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
 
-    <title>SelectContinent</title>
+    <title>Select Location</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/SynopticProjectChatAgent.styles.css" asp-append-version="true" />
@@ -90,14 +90,14 @@
                     </div>
 
 					<div> 
-    @using(Html.BeginForm("SelectLocation","Home", FormMethod.Post))
-        {
-            <p>Location</p>
+                    @using(Html.BeginForm("SelectLocation","Home", FormMethod.Post))
+                        {
+                            <p>Location</p>
 
-            <p>@Html.TextBoxFor(m=> m.Location)</p>
+                            <p>@Html.TextBoxFor(m=> m.Location)</p>
  
-            <p><input type="Submit" value="Submit"></p>
-        }
+                            <p><input type="Submit" value="Submit"></p>
+                        }
 							</div>
 					<a class="publisher-btn" href="#" data-abc="true"><i class="fa fa-smile"></i></a> <a class="publisher-btn text-info" href="#" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div>
                 </div>

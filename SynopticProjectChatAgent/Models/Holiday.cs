@@ -1,4 +1,6 @@
-﻿namespace SynopticProjectChatAgent.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SynopticProjectChatAgent.Models
 {
     public class Holiday
     {
