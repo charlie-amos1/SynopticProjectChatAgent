@@ -1,11 +1,18 @@
 ﻿@model IEnumerable<SynopticProjectChatAgent.Models.Holiday>
 
+@{
+    Layout = null;
+}
+
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>FilteredResults</title>
+    <title>ViewAll</title>
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/SynopticProjectChatAgent.styles.css" asp-append-version="true" />
 </head>
 <body>
 <p>
@@ -81,6 +88,67 @@
             </td>
         </tr>
 }
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">FlyAway Flights</h1>
+        <p class="lead text-muted">We have filtered our results for you</p>
+      </div>
+    </div>
+  </section>
+
+              @foreach (var item in Model)
+            {
+               
+
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col">
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+            <div class="card-body">
+              <p class="card-text"> Country: @Html.DisplayFor(modelItem=> item.Country)</p>
+              <p class="card-text">Category: @Html.DisplayFor(modelItem=> item.Category)</p>
+              <p class="card-text">Location: @Html.DisplayFor(modelItem=> item.Location)</p>
+              <p class="card-text">Hotel Name: @Html.DisplayFor(modelItem=> item.HotelName)</p>
+              <p class="card-text">Price Per Night: @Html.DisplayFor(modelItem=> item.PricePerNight)</p>
+              <p class="card-text">Star Rating: @Html.DisplayFor(modelItem=> item.StarRating)</p>
+
+
+
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+          <div class="card shadow-sm">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+
+            <div class="card-body">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                </div>
+                <small class="text-muted">9 mins</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+            }
     </tbody>
 </table>
 </body>

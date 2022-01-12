@@ -7,6 +7,8 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Session;
 using Newtonsoft.Json;
+using SynopticProjectChatAgent.FilterModels;
+using SynopticProjectChatAgent.Helper;
 
 namespace SynopticProjectChatAgent.Controllers
 {
@@ -17,7 +19,9 @@ namespace SynopticProjectChatAgent.Controllers
         private Holiday userInput = new Holiday();
         //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
-
+        private FilterOptions filterOptions = new FilterOptions();
+        private StringInputValidator inputValidator = new StringInputValidator();        
+        
         private string _continent;
         private string _category;
         private string _location;
@@ -41,20 +45,14 @@ namespace SynopticProjectChatAgent.Controllers
             //hol.Continent = continent;
             userInput.Continent = continent;
             HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
+            if (inputValidator.CheckForValidInputs(filterOptions.ContinentChoices,continent)==false)
+            {
+
+            }
             return View("SelectCategory");
 
         }
 
-        public void SetSessionString(string sessionName,string userInput)
-        {
-            HttpContext.Session.SetString(sessionName, userInput);
-
-        }
-
-        public string GetSessionString(string sessionKeyName) 
-        {
-           return HttpContext.Session.GetString(sessionKeyName);
-        }
 
         [HttpPost] 
         public ActionResult SelectCategory(string category) 
@@ -64,17 +62,8 @@ namespace SynopticProjectChatAgent.Controllers
             return View("SelectLocation");
         }
 
-        public ActionResult SelectContinent() 
-        {
-            return View();
-        }
 
-        public ActionResult SelectCategory() 
-        {
-            return View("");
-        }
-
-        [HttpPost]
+    [HttpPost]
         public ActionResult SelectLocation(string location)
         {
             userInput.Location= location;
