@@ -1,4 +1,7 @@
-﻿@model SynopticProjectChatAgent.Models.Holiday
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model SynopticProjectChatAgent.Models.Holiday
+
 
 @{
     Layout = null;
@@ -93,7 +96,7 @@
 					{
 						<p>Continent</p>
 
-						<p>@Html.TextBoxFor(m=> m.Continent)</p>
+						<p>@Html.TextBoxFor(m=> m.Continent)  </p>
 						<p><input type="Submit" value="Submit"/></p>
 							
 					}

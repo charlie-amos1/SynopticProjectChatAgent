@@ -1,5 +1,6 @@
-﻿@model SynopticProjectChatAgent.Models.Holiday
-
+﻿@page
+@using Microsoft.AspNetCore.Http
+@model SynopticProjectChatAgent.Models.Holiday
 @{
     Layout = null;
 }
@@ -70,15 +71,13 @@
                         <h4 class="card-title"><strong>Chat</strong></h4> <a class="btn btn-xs btn-secondary" href="#" data-abc="true">Let's Chat App</a>
                     </div>
                     <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
-                        <div class="media media-chat"> <img 
+                        <div class="media media-chat">  
                             <div class="media-body">
-                                
                             </div>
                         </div>
                         <div class="media media-chat media-chat-reverse">
                             <div class="media-body">
-                  
-                                <p class="meta"><time 
+                                <p class="meta"><time></time> 
                             </div>
                         </div>
                         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
@@ -95,6 +94,8 @@
 							<p>Category</p>
 
 							<p>@Html.TextBoxFor(m=> m.Category)</p>
+
+                            
 				 
 							<p><input type="Submit" value="Submit"></p>
 						}

@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Session;
+using Newtonsoft.Json;
 
 namespace SynopticProjectChatAgent.Controllers
 {
@@ -16,10 +17,18 @@ namespace SynopticProjectChatAgent.Controllers
         private Holiday userInput = new Holiday();
         //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
+
+        private string _continent;
+        private string _category;
+        private string _location;
+        private string _tempating;
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
+
+
 
         public IActionResult ViewAll()
         {
@@ -33,15 +42,27 @@ namespace SynopticProjectChatAgent.Controllers
             //Holiday hol = new Holiday();
             //hol.Continent = continent;
             userInput.Continent = continent;
-            TempData["Continent"] = continent;
+            HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
             return View("SelectCategory");
+
+        }
+
+        public void SetSessionString(string sessionName,string userInput)
+        {
+            HttpContext.Session.SetString(sessionName, userInput);
+
+        }
+
+        public string GetSessionString(string sessionKeyName) 
+        {
+           return HttpContext.Session.GetString(sessionKeyName);
         }
 
         [HttpPost] 
         public ActionResult SelectCategory(string category) 
         {
             userInput.Category= category;
-            TempData["Category"] = category;
+            HttpContext.Session.SetString("Category", JsonConvert.SerializeObject(userInput.Category));
             return View("SelectLocation");
         }
 
@@ -52,6 +73,7 @@ namespace SynopticProjectChatAgent.Controllers
 
         public ActionResult SelectCategory() 
         {
+            Holiday holiday= new Holiday();
             return View("");
         }
 
@@ -59,7 +81,7 @@ namespace SynopticProjectChatAgent.Controllers
         public ActionResult SelectLocation(string location)
         {
             userInput.Location= location;
-            TempData["Location"] = location;
+            HttpContext.Session.SetString("Location", JsonConvert.SerializeObject(userInput.Location));
             return View("SelectTempRating");
         }
 
@@ -72,7 +94,7 @@ namespace SynopticProjectChatAgent.Controllers
         public ActionResult SelectTempRating(string tempRating)
         {
             userInput.TempRating = tempRating;
-            TempData["TempRating"] = tempRating;
+            HttpContext.Session.SetString("TempRating", JsonConvert.SerializeObject(tempRating));
             return View("FilteredResults");
         }
 
@@ -85,18 +107,18 @@ namespace SynopticProjectChatAgent.Controllers
         public ActionResult FilteredResults() 
         {
 
-            var continent = TempData["Continent"];
-            var category = TempData["Category"];
-            var location = TempData["Location"];
-            var tempRating = TempData["TempRating"];
+            var continent = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Continent"));
+            var category = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Category"));
+            var location = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Location"));
+            var tempRating = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("TempRating"));
 
-            if (ModelState.IsValid)
-            {
-                //return View(connection.GetFilteredHolidays(holiday, "Europe", "active", "sea", "mild"));
+            //if (ModelState.IsValid)
+            //{
+            //    //return View(connection.GetFilteredHolidays(holiday, "Europe", "active", "sea", "mild"));
 
-                //return View(connection.GetFilteredHolidays(holiday,continent,category,location,tempRating));
-            }
-            return View();
+            //    return View(connection.GetFilteredHolidays(holiday,continent,category,location,tempRating));
+            //}
+            return View(connection.GetFilteredHolidays(holiday, continent, category, location, tempRating));
         }
 
         public ActionResult HolidayInput()
