@@ -1,7 +1,6 @@
 ﻿
 CREATE PROCEDURE HolidayFilter 
 	-- Add the parameters for the stored procedure here
-	@Continent nvarchar(50),
 	@Category nvarchar(50),
 	@Location nvarchar(50),
 	@TempRating nvarchar(50)
@@ -13,5 +12,5 @@ BEGIN
 
     -- Insert statements for procedure here
 	SELECT * from dbo.Holiday 
-	where Continent like '%' + @Continent + '%' and Category like '%' + @Category + '%' and Location like '%' + @Location + '%' and TempRating like '%' + @TempRating+ '%'
+	where Category like '%' + @Category + '%' and Location like '%' + @Location + '%' and TempRating like '%' + @TempRating+ '%'
 END
