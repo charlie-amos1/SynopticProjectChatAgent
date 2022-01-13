@@ -20,7 +20,7 @@ namespace SynopticProjectChatAgent.Controllers
         private DataConnection connection = new DataConnection();
         private UiHolidayModel model = new UiHolidayModel();
         private FilterOptions filter = new FilterOptions();
-
+        private InputValidation validator = new InputValidation();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -31,24 +31,11 @@ namespace SynopticProjectChatAgent.Controllers
             return View(connection.GetAllHolidays(holiday));
         }
 
-        public bool ValidateInput(string input, List<string> categoryFilter, string viewName)
-        {
-
-            if (input!= null)
-            {
-                if (categoryFilter.Contains(input))
-                {
-                    return true;
-                }
-
-            }
-            return false;
-        }
 
         [HttpPost]
         public ActionResult SelectContinent(string continent)
         {
-            if (ValidateInput(continent,filter.ContinentsList,"SelectCategory")==true)
+            if (validator.ValidateInput(continent,filter.ContinentsList,"SelectCategory")==true)
             {
                 userInput.Continent = continent;
                 HttpContext.Session.SetString("Continent",userInput.Continent);
@@ -63,7 +50,7 @@ namespace SynopticProjectChatAgent.Controllers
         [HttpPost] 
         public ActionResult SelectCategory(string category) 
         {
-            if (ValidateInput(category, filter.CategoryList, "SelectCategory") == true)
+            if (validator.ValidateInput(category, filter.CategoryList, "SelectCategory") == true)
             {
                 userInput.Category = category;
                 HttpContext.Session.SetString("Category", userInput.Category);
@@ -86,7 +73,7 @@ namespace SynopticProjectChatAgent.Controllers
         [HttpPost]
         public ActionResult SelectLocation(string location)
         {
-            if (ValidateInput(location, filter.LocationList, "SelectLocation") == true)
+            if (validator.ValidateInput(location, filter.LocationList, "SelectLocation") == true)
             {
                 userInput.Location = location;
                 HttpContext.Session.SetString("Location", userInput.Location);
@@ -105,7 +92,7 @@ namespace SynopticProjectChatAgent.Controllers
         {
  
             
-            if (ValidateInput(tempRating, filter.TempRatingList, "SelectTempRating") == true)
+            if (validator.ValidateInput(tempRating, filter.TempRatingList, "SelectTempRating") == true)
             {
                 var continent = HttpContext.Session.GetString("Continent");
                 var category = HttpContext.Session.GetString("Category");
