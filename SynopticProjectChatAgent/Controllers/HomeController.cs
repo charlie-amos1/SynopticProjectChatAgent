@@ -17,11 +17,8 @@ namespace SynopticProjectChatAgent.Controllers
         private Holiday userInput = new Holiday();
         //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
-
-        private string _continent;
-        private string _category;
-        private string _location;
-        private string _tempating;
+        private UiHolidayFilters holidayFilters= new UiHolidayFilters();
+ 
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -34,14 +31,32 @@ namespace SynopticProjectChatAgent.Controllers
         }
 
 
-        [HttpPost]
-        public ActionResult SelectContinent(string continent)
+        protected void RemoveValidationError(string name)
         {
-            //Holiday hol = new Holiday();
-            //hol.Continent = continent;
-            userInput.Continent = continent;
-            HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
-            return View("SelectCategory");
+            for (var i = 0; i < 9; i++)
+            {
+                if (ModelState.Keys.ElementAt(i) == name &&
+                    ModelState.Values.ElementAt(i).Errors.Count > 0)
+                {
+                    ModelState.Values.ElementAt(i).Errors.Clear();
+                    break;
+                }
+            }
+        }
+
+
+         [HttpPost]
+        public ActionResult SelectContinent(UiHolidayFilters continent)
+        {
+
+            if (ModelState.IsValid)
+            {
+                userInput.Continent = continent.Continent;
+                ModelState.Clear();
+                HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
+                return View("SelectCategory");
+            }
+            return View();
 
         }
 
@@ -66,6 +81,7 @@ namespace SynopticProjectChatAgent.Controllers
 
         public ActionResult SelectContinent() 
         {
+            
             return View();
         }
 
@@ -105,14 +121,20 @@ namespace SynopticProjectChatAgent.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult FilteredResults() 
-        //{
 
+        [HttpPost]
+        public ActionResult HolidayInput(UiHolidayFilters hol)
+        {
+            if (ModelState.IsValid)
+            {
+                ModelState.Clear();
+                return View("FilteredResults");
 
-        //}
+            }
+            return View();
+        }
 
-        public ActionResult HolidayInput()
+        public ActionResult HolidayInput() 
         {
             return View();
         }

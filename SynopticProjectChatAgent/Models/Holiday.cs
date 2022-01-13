@@ -1,4 +1,6 @@
-﻿namespace SynopticProjectChatAgent.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SynopticProjectChatAgent.Models
 {
     public class Holiday
     {
@@ -6,11 +8,14 @@
 
         public string  HotelName { get; set; }
 
+
         public string TempRating { get; set; }
+
 
         public string Continent { get; set; }
 
         public string Country { get; set; }
+
 
         public string Category { get; set; }
 

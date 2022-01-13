@@ -48,7 +48,11 @@
                 <span asp-validation-for="Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Filter" formaction=@Url.Action("FilteredResults") formmethod="post" class="btn btn-primary" />
+                @using (Html.BeginForm("","",FormMethod.Post))
+                    {
+                        <input type="submit" value="Filter" class="btn btn-primary" />
+
+                    }
             </div>
         </form>
     </div>

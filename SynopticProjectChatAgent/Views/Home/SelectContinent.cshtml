@@ -1,6 +1,6 @@
 ﻿@page
 @using Microsoft.AspNetCore.Http
-@model SynopticProjectChatAgent.Models.Holiday
+@model SynopticProjectChatAgent.Models.UiHolidayFilters
 
 
 @{
@@ -95,11 +95,14 @@
 					@using(Html.BeginForm("SelectContinent","Home", FormMethod.Post))
 					{
 						<p>Continent</p>
+                        @Html.ValidationSummary()
 
 						<p>@Html.TextBoxFor(m=> m.Continent)  </p>
+                        @Html.ValidationMessageFor(m=> m.Continent)	
+
 						<p><input type="Submit" value="Submit"/></p>
-							
 					}
+
 			</div>
 					<a class="publisher-btn" href="#" data-abc="true"><i class="fa fa-smile"></i></a> <a class="publisher-btn text-info" href="#" data-abc="true"><i class="fa fa-paper-plane"></i></a> </div>
                 </div>
