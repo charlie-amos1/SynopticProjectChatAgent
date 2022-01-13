@@ -51,7 +51,7 @@ namespace SynopticProjectChatAgent.Controllers
             if (ValidateInput(continent,filter.ContinentsList,"SelectCategory")==true)
             {
                 userInput.Continent = continent;
-                HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
+                HttpContext.Session.SetString("Continent",userInput.Continent);
                 return View("SelectCategory");
 
             }
@@ -66,7 +66,7 @@ namespace SynopticProjectChatAgent.Controllers
             if (ValidateInput(category, filter.CategoryList, "SelectCategory") == true)
             {
                 userInput.Category = category;
-                HttpContext.Session.SetString("Category", JsonConvert.SerializeObject(userInput.Category));
+                HttpContext.Session.SetString("Category", userInput.Category);
                 return View("SelectLocation");
             }
             else return View("InvalidCategory");
@@ -89,7 +89,7 @@ namespace SynopticProjectChatAgent.Controllers
             if (ValidateInput(location, filter.LocationList, "SelectLocation") == true)
             {
                 userInput.Location = location;
-                HttpContext.Session.SetString("Location", JsonConvert.SerializeObject(userInput.Location));
+                HttpContext.Session.SetString("Location", userInput.Location);
                 return View("SelectTempRating");
             }
             return View("InvalidLocation");
@@ -103,16 +103,14 @@ namespace SynopticProjectChatAgent.Controllers
         [HttpPost]
         public ActionResult SelectTempRating(string tempRating)
         {
-            var continent = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Continent"));
-            var category = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Category"));
-            var location = JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString("Location"));
+ 
             
             if (ValidateInput(tempRating, filter.TempRatingList, "SelectTempRating") == true)
             {
-
+                var continent = HttpContext.Session.GetString("Continent");
+                var category = HttpContext.Session.GetString("Category");
+                var location = HttpContext.Session.GetString("Location");
                 userInput.TempRating = tempRating;
-                HttpContext.Session.SetString("TempRating", JsonConvert.SerializeObject(tempRating));
-
 
                 return View("FilteredResults", connection.GetFilteredHolidays(holiday, continent, category, location, tempRating));
             }
