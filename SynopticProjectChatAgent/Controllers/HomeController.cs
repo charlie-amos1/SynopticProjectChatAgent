@@ -17,11 +17,7 @@ namespace SynopticProjectChatAgent.Controllers
         private Holiday userInput = new Holiday();
         //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
-
-        private string _continent;
-        private string _category;
-        private string _location;
-        private string _tempating;
+        private UiHolidayModel model = new UiHolidayModel();    
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -37,28 +33,22 @@ namespace SynopticProjectChatAgent.Controllers
         [HttpPost]
         public ActionResult SelectContinent(string continent)
         {
-            //Holiday hol = new Holiday();
-            //hol.Continent = continent;
+
             userInput.Continent = continent;
             HttpContext.Session.SetString("Continent", JsonConvert.SerializeObject(userInput.Continent));
             return View("SelectCategory");
 
         }
 
-        public void SetSessionString(string sessionName,string userInput)
+        public string GetPreviousAnswer(string previousEntry) 
         {
-            HttpContext.Session.SetString(sessionName, userInput);
-
-        }
-
-        public string GetSessionString(string sessionKeyName) 
-        {
-           return HttpContext.Session.GetString(sessionKeyName);
+            return JsonConvert.DeserializeObject<string>(HttpContext.Session.GetString(previousEntry));
         }
 
         [HttpPost] 
         public ActionResult SelectCategory(string category) 
         {
+            var previousanswer = GetPreviousAnswer("Continent");
             userInput.Category= category;
             HttpContext.Session.SetString("Category", JsonConvert.SerializeObject(userInput.Category));
             return View("SelectLocation");
@@ -105,30 +95,12 @@ namespace SynopticProjectChatAgent.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public ActionResult FilteredResults() 
-        //{
-
-
-        //}
 
         public ActionResult HolidayInput()
         {
             return View();
         }
          
-
-        public IActionResult Index()
-        {
-            HttpContext.Session.SetString("TEst", "Session Value");
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            ViewBag.sessionv = HttpContext.Session.GetString("Test");
-            return View();
-        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

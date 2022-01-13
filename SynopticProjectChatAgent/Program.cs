@@ -7,6 +7,8 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDistributedMemoryCache();
 
+
+
 builder.Services.AddSession(options =>
 {
     options.Cookie.Name = ".SynopticProjectChatAgent.Session";
