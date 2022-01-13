@@ -72,7 +72,9 @@
                     <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
                         <div class="media media-chat"> <img 
                             <div class="media-body">
-                                
+                                         <p> Select one of the following:</p>
+                                         
+                                         <p> Mounatin, Sea, City:</p>
                             </div>
                         </div>
                         <div class="media media-chat media-chat-reverse">
@@ -92,7 +94,6 @@
 					<div> 
     @using(Html.BeginForm("SelectLocation","Home", FormMethod.Post))
         {
-            <p>Location</p>
 
             <p>@Html.TextBoxFor(m=> m.Location)</p>
  

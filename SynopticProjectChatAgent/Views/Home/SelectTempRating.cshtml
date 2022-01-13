@@ -72,7 +72,7 @@
                     <div class="ps-container ps-theme-default ps-active-y" id="chat-content" style="overflow-y: scroll !important; height:400px !important;">
                         <div class="media media-chat"> <img 
                             <div class="media-body">
-                                
+                                            <p>StarRating</p>
                             </div>
                         </div>
                         <div class="media media-chat media-chat-reverse">
@@ -92,7 +92,6 @@
 					<div> 
     @using(Html.BeginForm("SelectTempRating","Home", FormMethod.Post))
         {
-            <p>StarRating</p>
 
             <p>@Html.TextBoxFor(m=> m.TempRating)</p>
             <p><input type="Submit" value="Submit" /> </p>
