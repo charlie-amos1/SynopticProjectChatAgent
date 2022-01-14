@@ -28,8 +28,7 @@ namespace AutomationTests.StepDefinitions
         internal void EnterContinent(string continent)
         {
             //MoveToElement(continentTextBox);
-            Click(FlyawayTitle);
-            ClickPageDown();
+            //MoveToElement(continentTextBox);
             ClickPageDown();
             Delay();
             EnterText(continentTextBox,continent);
@@ -37,8 +36,10 @@ namespace AutomationTests.StepDefinitions
 
         internal void ClickSubmit()
         {
-            //MoveToElement(footer);
             Delay();
+            ClickPageDown();
+            //MoveToElement(submitButton);
+            //MoveToElement(footer);
             Click(submitButton);
         }
 
