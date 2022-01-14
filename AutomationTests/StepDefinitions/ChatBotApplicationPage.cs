@@ -29,7 +29,6 @@ namespace AutomationTests.StepDefinitions
         {
             //MoveToElement(continentTextBox);
             //MoveToElement(continentTextBox);
-            ClickPageDown();
             Delay();
             EnterText(continentTextBox,continent);
         }
@@ -38,6 +37,7 @@ namespace AutomationTests.StepDefinitions
         {
             Delay();
             ClickPageDown();
+            Delay();
             //MoveToElement(submitButton);
             //MoveToElement(footer);
             Click(submitButton);

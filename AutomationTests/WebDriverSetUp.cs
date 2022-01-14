@@ -30,6 +30,15 @@ namespace AutomationTests
 
         }
 
+        [BeforeScenario]
+        public static void BeforeScenario()
+        {
+            //as the search and the results page are technically the same page
+            //if I refresh the screen it will take me back to the search page
+            driver.Navigate().GoToUrl("http://localhost:5213/Home/SelectContinent");
+            driver.Manage().Cookies.DeleteAllCookies();
+        }
+
         [AfterTestRun]
         public static void TearDown()
         {

@@ -53,7 +53,7 @@ namespace AutomationTests
 
         protected void Delay()
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
         }
 
         protected void Click(By locator)

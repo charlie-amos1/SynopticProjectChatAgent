@@ -59,16 +59,6 @@ namespace SynopticProjectChatAgent.Controllers
 
         }
 
-        public ActionResult SelectContinent() 
-        {
-            return View();
-        }
-
-        public ActionResult SelectCategory() 
-        {
-            return View("");
-        }
-
         [HttpPost]
         public ActionResult SelectLocation(string location)
         {
@@ -79,11 +69,6 @@ namespace SynopticProjectChatAgent.Controllers
                 return View("SelectTempRating");
             }
             return View("InvalidLocation");
-        }
-
-        public ActionResult SelectLocation() 
-        {
-            return View();
         }
 
         [HttpPost]
@@ -105,17 +90,6 @@ namespace SynopticProjectChatAgent.Controllers
 
         }
 
-        public ActionResult SelectTempRating()
-        {
-            return View();
-        }
-
-
-        public ActionResult HolidayInput()
-        {
-            return View();
-        }
-         
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
