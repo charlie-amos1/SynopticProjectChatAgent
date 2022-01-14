@@ -16,7 +16,6 @@ namespace SynopticProjectChatAgent.Controllers
         private readonly ILogger<HomeController> _logger;
         public List<Holiday> holiday = new List<Holiday>();
         private Holiday userInput = new Holiday();
-        //private string dbConnectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
         private DataConnection connection = new DataConnection();
         private UiHolidayModel model = new UiHolidayModel();
         private FilterOptions filter = new FilterOptions();
