@@ -1,6 +1,8 @@
 ﻿Feature: ChatBot Feature
 
-
+//Feature file allows me to write tests , reusing existing code. Helps stakeholders understand the tests better. 
+//each step is an instruction that simulates user experience
+//then is always an assertion
 @mytag
 Scenario: I can progress through each page.
 	Given I enter 'Europe' in the select continent page

@@ -33,6 +33,7 @@ namespace AutomationTests.StepDefinitions
         [Then(@"I should be taken to the '([^']*)' page")]
         public void ThenIShouldBeTakenToThePage(string pageTitle)
         {
+            //asserts that the title we passed through is the same as the title that i get from the driver
             Assert.AreEqual(pageTitle, _page.title());
         }
 

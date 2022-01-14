@@ -1,10 +1,10 @@
-﻿using SynopticProjectChatAgent.Validators;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace SynopticProjectChatAgent.Models
 {
     public class Holiday
     {
+        //each model represents a column from the database/aspect of the holiday
         public int HoliidayReference { get; set; }
 
         public string  HotelName { get; set; }
@@ -24,7 +24,7 @@ namespace SynopticProjectChatAgent.Models
 
         public decimal PricePerNight { get; set; }
 
-
+        //helps with testing
         public bool Equals(Holiday other)
         {
             if (Continent != other.Continent)

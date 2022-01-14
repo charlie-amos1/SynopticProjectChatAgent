@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using SynopticProjectChatAgent.Controllers;
 using SynopticProjectChatAgent.Helper;
-using SynopticProjectChatAgent.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace SynopticProjectChatAgent.Tests
