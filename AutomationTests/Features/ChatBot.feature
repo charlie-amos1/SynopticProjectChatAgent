@@ -19,7 +19,7 @@ Scenario: When I input an invalid continent I am brought to an Invalid option pa
 	Then I should be taken to the 'Invalid Continent' page
 
 	Scenario: When I input an invalid category I am brought to an Invalid page 
-	Given I enter 'PlanetVenus' in the select continent page
+	Given I enter 'Europe' in the select continent page
 	When I click submit
 	And I enter 'dangerous' in the select catergory page
 	When I click submit

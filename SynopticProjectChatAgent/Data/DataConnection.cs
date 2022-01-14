@@ -7,11 +7,13 @@ namespace SynopticProjectChatAgent.Data
 {
     public class DataConnection
     {
+        //links to a my database
         string _connectionString = "Data Source=.;Initial Catalog=ProjectCDatabase;Integrated Security=True";
 
 
         public List<Holiday> GetFilteredHolidays(List<Holiday> recordscreated, string continent, string category, string location, string tempRating)
         {
+            //calls to my database and passes through a stored procedure called 'holidayfilter
             using (var connection = new SqlConnection(_connectionString))
             {
                 recordscreated = connection.Query<Holiday>("HolidayFilter", new { Continent = continent, Category = category, Location = location, TempRating=tempRating },
@@ -26,9 +28,7 @@ namespace SynopticProjectChatAgent.Data
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                //recordscreated = connection.Query<Holiday>("SelectAll", commandType: CommandType.StoredProcedure).ToList();
                 createdRecords = connection.Query<Holiday>("Select * From [Dbo].[Holiday]").ToList();
-
             }
             return createdRecords;
         }

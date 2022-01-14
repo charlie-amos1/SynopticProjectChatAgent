@@ -31,16 +31,21 @@ namespace SynopticProjectChatAgent.Controllers
         }
 
 
+        //http post sends data from the view
         [HttpPost]
         public ActionResult SelectContinent(string continent)
         {
-            if (validator.ValidateInput(continent, filter.ContinentsList, "SelectCategory") == true)
+            //validate input checks the continent parameter against a list of continents to ensure its valid
+            if (validator.ValidateInput(continent, filter.ContinentsList, "Continent") == true)
             {
                 userInput.Continent = continent;
+                //this saves the continent parameter in a string to be passed through to the filter method
                 HttpContext.Session.SetString("Continent", userInput.Continent);
+                //returns the view named select category
                 return View("SelectCategory");
 
             }
+            //returns the invalid view
             return View("InvalidContinent");
 
         }
@@ -66,7 +71,7 @@ namespace SynopticProjectChatAgent.Controllers
 
         public ActionResult SelectCategory()
         {
-            return View("");
+            return View();
         }
 
         [HttpPost]
@@ -93,11 +98,12 @@ namespace SynopticProjectChatAgent.Controllers
 
             if (validator.ValidateInput(tempRating, filter.TempRatingList, "SelectTempRating") == true)
             {
+                //gets the strings that are saved into the session and saves them to a variable.
                 var continent = HttpContext.Session.GetString("Continent");
                 var category = HttpContext.Session.GetString("Category");
                 var location = HttpContext.Session.GetString("Location");
                 userInput.TempRating = tempRating;
-
+                //passes my variables to my stored procedure
                 return View("FilteredResults", connection.GetFilteredHolidays(holiday, continent, category, location, tempRating));
             }
 

@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using SynopticProjectChatAgent.Controllers;
 using SynopticProjectChatAgent.Helper;
 using SynopticProjectChatAgent.Validators;
 using System.ComponentModel.DataAnnotations;
@@ -12,11 +13,11 @@ namespace SynopticProjectChatAgent.Tests
         {
             //arrange
             FilterOptions filter = new FilterOptions();
-            ContinentValidation continentValidator = new ContinentValidation();
+            InputValidation inputValidator = new InputValidation();
 
             var input = "dfalksl";
 
-            Assert.AreEqual(new ValidationResult("Not A Valid Continent"),continentValidator.IsValid(input));
+            Assert.IsFalse(inputValidator.ValidateInput(input,filter.ContinentsList,"SelectContinent"));
 
         //act
         //assert
