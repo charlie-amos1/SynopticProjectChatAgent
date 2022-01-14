@@ -14,13 +14,13 @@ namespace AutomationTests
     public class WebDriverHelper
     {
         private readonly IWebDriver _driver;
-        private const int SmallWait = 30;
-        Actions _actions;
+        private const int SmallWait = 3000;
+        private readonly Actions _actions; 
 
-        public WebDriverHelper(IWebDriver driver ,Actions actions)
+        public WebDriverHelper(IWebDriver driver , Actions actions)
         {
             _driver = driver;
-           _actions= actions;
+            _actions= actions;
         }
 
         protected WebDriverWait Wait(int timeInSecs)
@@ -39,6 +39,11 @@ namespace AutomationTests
             _actions.MoveToElement(_driver.FindElement(element)).Perform();
         }
 
+        protected void ClickPageDown() 
+        {
+            _actions.SendKeys(Keys.PageDown);
+        }
+
         protected void PressEnter(By element) 
         {
             _driver.FindElement(element).SendKeys(Keys.Enter);
@@ -46,7 +51,7 @@ namespace AutomationTests
 
         protected void Delay()
         {
-            Thread.Sleep(2000);
+            Thread.Sleep(3000);
         }
 
         protected void Click(By locator)
