@@ -11,4 +11,4 @@ Scenario: Enter continent and progress through the next page
 	When I click submit
 	And I enter 'mild' in the select Temperature Rating page
 	When I click submit
-	Then I should be taken to the 'ViewAll' page
+	Then I should be taken to the 'Filtered Results' page

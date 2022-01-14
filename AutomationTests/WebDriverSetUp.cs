@@ -17,7 +17,7 @@ namespace AutomationTests
         public static void InstantiateDriverSetup(IObjectContainer objectContainer)
         {
             var options = new ChromeOptions();
-            //options.AddArgument("start-maximized");
+            options.AddArgument("start-maximized");
             driver = new ChromeDriver(options);
             objectContainer.RegisterInstanceAs(driver);
 

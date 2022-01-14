@@ -14,11 +14,14 @@ namespace AutomationTests.StepDefinitions
         private By tempRatingTextBox = By.CssSelector("#TempRating");
         private By resultCards = By.CssSelector("[class = card-body]");
         private By FlyawayTitle = By.CssSelector("[class=fw-light]");
+        private By title = By.CssSelector("html head title");
         
+
         public ChatBotApplicationPage(IWebDriver driver) : base(driver)
         {
             _driver = driver;
         }
+
 
         internal void EnterContinent(string continent)
         {
@@ -27,22 +30,28 @@ namespace AutomationTests.StepDefinitions
 
         internal void ClickSubmit()
         {
+            Delay();
             Click(submitButton);
+        }
+
+        internal void PressEnter()
+        {
+            PressEnter(submitButton);
         }
 
         internal void ThePageHasChanged(string pageTitle)
         {
-            Assert.AreEqual(title, pageTitle);
+            Assert.AreEqual(pageTitle, title);
         }
 
         internal void EnterCategory(string category)
         {
-            EnterText(continentTextBox, category);
+            EnterText(categoryTextBox, category);
         }
 
         internal void EnterLocation(string location)
         {
-            EnterText(continentTextBox, location);
+            EnterText(locationTextBox, location);
         }
 
         internal void EnterTempRating(string temp)

@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
 using TechTalk.SpecFlow;
@@ -32,9 +33,14 @@ namespace AutomationTests.StepDefinitions
         [Then(@"I should be taken to the '([^']*)' page")]
         public void ThenIShouldBeTakenToThePage(string pageTitle)
         {
-            _page.ThePageHasChanged(pageTitle);
+            Assert.AreEqual(pageTitle, _page.title());
         }
 
+        [When(@"I press Enter")]
+        public void WhenIPressEnter()
+        {
+            _page.PressEnter();
+        }
 
         [When(@"I enter '([^']*)' in the select catergory page")]
         public void WhenIEnterInTheSelectCatergoryPage(string active)
