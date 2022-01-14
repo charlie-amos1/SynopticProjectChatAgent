@@ -34,10 +34,10 @@ namespace SynopticProjectChatAgent.Controllers
         [HttpPost]
         public ActionResult SelectContinent(string continent)
         {
-            if (validator.ValidateInput(continent,filter.ContinentsList,"SelectCategory")==true)
+            if (validator.ValidateInput(continent, filter.ContinentsList, "SelectCategory") == true)
             {
                 userInput.Continent = continent;
-                HttpContext.Session.SetString("Continent",userInput.Continent);
+                HttpContext.Session.SetString("Continent", userInput.Continent);
                 return View("SelectCategory");
 
             }
@@ -46,8 +46,8 @@ namespace SynopticProjectChatAgent.Controllers
         }
 
 
-        [HttpPost] 
-        public ActionResult SelectCategory(string category) 
+        [HttpPost]
+        public ActionResult SelectCategory(string category)
         {
             if (validator.ValidateInput(category, filter.CategoryList, "SelectCategory") == true)
             {
@@ -57,6 +57,16 @@ namespace SynopticProjectChatAgent.Controllers
             }
             else return View("InvalidCategory");
 
+        }
+
+        public ActionResult SelectContinent()
+        {
+            return View();
+        }
+
+        public ActionResult SelectCategory()
+        {
+            return View("");
         }
 
         [HttpPost]
@@ -71,11 +81,16 @@ namespace SynopticProjectChatAgent.Controllers
             return View("InvalidLocation");
         }
 
+        public ActionResult SelectLocation()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult SelectTempRating(string tempRating)
         {
- 
-            
+
+
             if (validator.ValidateInput(tempRating, filter.TempRatingList, "SelectTempRating") == true)
             {
                 var continent = HttpContext.Session.GetString("Continent");
@@ -88,6 +103,17 @@ namespace SynopticProjectChatAgent.Controllers
 
             return View("InvalidTempRating");
 
+        }
+
+        public ActionResult SelectTempRating()
+        {
+            return View();
+        }
+
+
+        public ActionResult HolidayInput()
+        {
+            return View();
         }
 
 
