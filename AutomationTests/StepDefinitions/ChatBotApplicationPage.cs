@@ -27,8 +27,7 @@ namespace AutomationTests.StepDefinitions
 
         internal void EnterContinent(string continent)
         {
-            //MoveToElement(continentTextBox);
-            //MoveToElement(continentTextBox);
+
             Delay();
             EnterText(continentTextBox,continent);
         }
@@ -38,8 +37,6 @@ namespace AutomationTests.StepDefinitions
             Delay();
             ClickPageDown();
             Delay();
-            //MoveToElement(submitButton);
-            //MoveToElement(footer);
             Click(submitButton);
         }
 
@@ -50,19 +47,16 @@ namespace AutomationTests.StepDefinitions
 
         internal void EnterCategory(string category)
         {
-            //MoveToElement(categoryTextBox);
             EnterText(categoryTextBox, category);
         }
 
         internal void EnterLocation(string location)
         {
-            //MoveToElement(locationTextBox);
             EnterText(locationTextBox, location);
         }
 
         internal void EnterTempRating(string temp)
         {
-            //MoveToElement(tempRatingTextBox);
             EnterText(tempRatingTextBox, temp);
         }
 
